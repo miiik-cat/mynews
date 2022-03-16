@@ -19,15 +19,12 @@ Route::group(['prefix' => 'admin'], function() {
 });
 
 //3.「http://XXXXXX.jp/XXX というアクセスが来たときに、 AAAControllerのbbbというAction に渡すRoutingの設定」を書いてみてください
-
-Route::group(['prefix' => 'XXX'], function() {
-    Route::get('news/create', 'XXX\AAAController@bbb');
-});
+Route::get('XXX', 'AAAController@bbb');
 
 //4.web.phpを編集して、admin/profile/create にアクセスしたら ProfileController の add Action に,
 //admin/profile/edit にアクセスしたら ProfileController の edit Action に割り当てるように設定してください
 
-Route::group(['prefix' => 'admin','edit'], function() {
+Route::group(['prefix' => 'admin'], function() {
     Route::get('profile/create', 'Admin\ProfileController@add');
-    Route::get('profile/create', 'Edit\ProfileController@edit');
+    Route::get('profile/edit', 'Admin\ProfileController@edit');
 });
