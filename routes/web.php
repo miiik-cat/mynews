@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 //3.「http://XXXXXX.jp/XXX というアクセスが来たときに、 AAAControllerのbbbというAction に渡すRoutingの設定」を書いてみてください
 Route::get('XXX', 'AAAController@bbb');
 
@@ -33,16 +29,15 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
     
- Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
-     Route::get('news/create', 'Admin\NewsController@add');
-     Route::post('news/create', 'Admin\NewsController@create'); # 追記
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
+    Route::get('news/create', 'Admin\NewsController@add');
+    Route::post('news/create', 'Admin\NewsController@create'); 
+    Route::get('news', 'Admin\NewsController@index'); // 追記
+    Route::get('news/edit', 'Admin\NewsController@edit'); // 追記
+    Route::post('news/edit', 'Admin\NewsController@update'); // 追記
+    Route::get('news/delete', 'Admin\NewsController@delete');# 追記
 });
 
-Route::group(['prefix' => 'admin'], function() {
-    Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
-    Route::post('news/create', 'Admin\NewsController@create')->middleware('auth');
-    Route::get('news', 'Admin\NewsController@index')->middleware('auth'); // 追記
-    Route::get('news/edit', 'Admin\NewsController@edit')->middleware('auth'); // 追記
-    Route::post('news/edit', 'Admin\NewsController@update')->middleware('auth'); // 追記
-    Route::get('news/delete', 'Admin\NewsController@delete')->middleware('auth');
-});
+Route::get('/', 'NewsController@index');
+
+Route::get('/', 'ProfileController@index');
