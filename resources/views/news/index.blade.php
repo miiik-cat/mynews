@@ -1,7 +1,10 @@
 @extends('layouts.front')
 
+@section('title', 'Myニュース')
+
 @section('content')
     <div class="container">
+        <h1>top page</h1>
         <hr color="#c0c0c0">
         @if (!is_null($headline))
             <div class="row">
